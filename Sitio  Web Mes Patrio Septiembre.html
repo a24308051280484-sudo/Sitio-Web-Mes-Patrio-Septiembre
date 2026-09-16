@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio Informativo - Mes Patrio | ¡Viva México!</title>
+    <style>
+        :root {
+            --primary-green: #006847;
+            --primary-red: #CE1126;
+            --bg-cream: #faf8f5;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #5a6b7c;
+            --accent-gold: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER / BANNER */
+        header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #004d34 50%, var(--primary-red) 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        /* ESTILO PARA LA IMAGEN DE LA CAMPANA EN EL HEADER */
+        .header-bell-img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        header p.subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            background-color: #1a252f;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-green);
+            color: #ffffff;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* TIMELINE PREVIEW */
+        .timeline-overview {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-green);
+        }
+
+        .timeline-overview h2 {
+            text-align: center;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .timeline-banner-img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .timeline-item-summary {
+            background: #f4f7f6;
+            padding: 15px 10px;
+            border-radius: 8px;
+            border-bottom: 3px solid var(--primary-red);
+        }
+
+        .timeline-item-summary .date {
+            font-weight: bold;
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .timeline-item-summary .event {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-top: 5px;
+        }
+
+        /* SECTION TITLES */
+        .section-header {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            display: inline-block;
+            padding-bottom: 8px;
+            border-bottom: 4px solid var(--primary-red);
+        }
+
+        /* CARD LISTINGS & IMAGES */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e1e8ed;
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 320px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-header-title {
+            background-color: #f8f9fa;
+            padding: 15px 25px;
+            border-bottom: 2px solid #e9ecef;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header-title span.badge {
+            background-color: var(--primary-red);
+            color: white;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-right: 12px;
+            font-weight: normal;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-body p {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* HIGHLIGHT BOX FOR MYTHS */
+        .myth-card {
+            border-left: 6px solid var(--accent-gold);
+        }
+
+        .myth-card .card-header-title {
+            color: #b38600;
+        }
+
+        .myth-card .badge {
+            background-color: var(--accent-gold);
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1a252f;
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-top: 60px;
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .footer-banner-img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        footer p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .student-info {
+            background-color: rgba(255, 255, 255, 0.05);
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .student-info p {
+            margin-bottom: 5px;
+            color: #e2e8f0;
+        }
+
+        .student-info strong {
+            color: var(--accent-gold);
+        }
+
+        footer nav {
+            background: transparent;
+            box-shadow: none;
+            position: static;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        footer nav a {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        footer nav a:hover {
+            color: white;
+            background: transparent;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .timeline-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .card-img {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO PRINCIPAL CON CAMPANA EN HTML -->
+    <header id="inicio">
+        <img src="campana.png" alt="Campana de Dolores" class="header-bell-img">
+        <h1>¡VIVA MÉXICO! EL MES PATRIO</h1>
+        <p class="subtitle">Sitio Informativo Mes Patrio - Fechas, Personajes e Historiografía</p>
+    </header>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+        <a href="#linea-de-tiempo">Línea de Tiempo</a>
+        <a href="#personajes">Personajes Ilustres</a>
+        <a href="#mitos-y-leyendas">Mitos y Leyendas</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- RESUMEN VISUAL DE LÍNEA DE TIEMPO -->
+        <section class="timeline-overview">
+            <h2>Línea de Tiempo del Mes Patrio</h2>
+            <img src="linea_tiempo_previa.png" alt="Línea de Tiempo del Mes Patrio" class="timeline-banner-img">
+            <div class="timeline-grid">
+                <div class="timeline-item-summary">
+                    <span class="date">13 Sep</span>
+                    <span class="event">Niños Héroes</span>
+                </div>
+                <div class="timeline-item-summary">
+                    <span class="date">15 Sep</span>
+                    <span class="event">Grito de Dolores</span>
+                </div>
+                <div class="timeline-item-summary">
+                    <span class="date">16 Sep</span>
+                    <span class="event">Inicio de Independencia</span>
+                </div>
+                <div class="timeline-item-summary">
+                    <span class="date">27 Sep</span>
+                    <span class="event">Consumación</span>
+                </div>
+                <div class="timeline-item-summary">
+                    <span class="date">28 Sep</span>
+                    <span class="event">Acta de Independencia / Alhóndiga</span>
+                </div>
+                <div class="timeline-item-summary">
+                    <span class="date">30 Sep</span>
+                    <span class="event">Natalicio de Morelos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: LÍNEA DE TIEMPO DETALLADA -->
+        <section id="linea-de-tiempo">
+            <div class="section-header">
+                <h2>Línea de Tiempo Histórica</h2>
+            </div>
+
+            <article class="content-card">
+                <img src="castillo_chapultepec.png" alt="Castillo de Chapultepec" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">13 de Septiembre</span>
+                    Defensa del Castillo de Chapultepec
+                </div>
+                <div class="card-body">
+                    <p><strong>Evento Histórico:</strong> Durante la Intervención Norteamericana de 1847, las tropas de EE.UU. bombardearon e invadieron el Castillo de Chapultepec, sede del Colegio Militar.</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="grito_dolores.png" alt="Grito de Dolores" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">15 y 16 de Septiembre</span>
+                    El Grito de Dolores e Inicio de la Guerra de Independencia
+                </div>
+                <div class="card-body">
+                    <p><strong>Evento Histórico:</strong> La madrugada del 16 de septiembre de 1810, tras ser descubierta la Conspiración de Querétaro, se convocó al pueblo a tomar las armas contra el gobierno virreinal en la parroquia de Dolores, Guanajuato.</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="consumacion_independencia.png" alt="Consumación de la Independencia" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">27 de Septiembre</span>
+                    Consumación de la Independencia de México
+                </div>
+                <div class="card-body">
+                    <p><strong>Evento Histórico:</strong> En 1821, tras 11 años de lucha armada, el Ejército Trigarante hizo su entrada triunfal a la Ciudad de México, firmándose al día siguiente el Acta de Independencia del Imperio Mexicano.</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="toma_alhondiga.png" alt="Toma de la Alhóndiga de Granaditas" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">28 de Septiembre</span>
+                    Toma de la Alhóndiga de Granaditas
+                </div>
+                <div class="card-body">
+                    <p><strong>Evento Histórico:</strong> Primera gran batalla del ejército insurgente en 1810, donde se tomó el almacén de granos en Guanajuato donde se refugiaban las autoridades españolas.</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="jose_morelos.png" alt="José María Morelos y Pavón" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">30 de Septiembre</span>
+                    Natalicio de José María Morelos y Pavón
+                </div>
+                <div class="card-body">
+                    <p><strong>Evento Histórico:</strong> En 1765 nace en Valladolid (hoy Morelia) el líder de la segunda etapa de la Independencia y principal arquitecto del primer proyecto constitucional del país.</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- SECCIÓN: PERSONAJES ILUSTRES -->
+        <section id="personajes">
+            <div class="section-header">
+                <h2>Personajes Ilustres</h2>
+            </div>
+
+            <article class="content-card">
+                <img src="personajes_1.png" alt="Defensores de Chapultepec" class="card-img">
+                <div class="card-header-title">
+                    Defensores de Chapultepec
+                </div>
+                <div class="card-body">
+                    <p><strong>Personajes Ilustres:</strong> Los cadetes Juan de la Barrera, Agustín Melgar, Francisco Márquez, Fernando Montes de Oca, Vicente Suárez y Juan Escutia (Niños Héroes), junto con el General Nicolás Bravo.</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="personajes_2.png" alt="Iniciadores de la Independencia" class="card-img">
+                <div class="card-header-title">
+                    Iniciadores de la Independencia
+                </div>
+                <div class="card-body">
+                    <p><strong>Personajes Ilustres:</strong> Miguel Hidalgo y Costilla (Padre de la Patria), Josefa Ortiz de Domínguez (La Corregidora), Ignacio Allende y Juan Aldama.</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="personajes_3.png" alt="Líderes de la Consumación" class="card-img">
+                <div class="card-header-title">
+                    Líderes de la Consumación
+                </div>
+                <div class="card-body">
+                    <p><strong>Personajes Ilustres:</strong> Agustín de Iturbide y Vicente Guerrero (quienes pactaron la paz mediante el Abrazo de Acatempan y el Plan de Iguala).</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="personajes_4.png" alt="Héroes Insurgentes" class="card-img">
+                <div class="card-header-title">
+                    Héroes Insurgentes
+                </div>
+                <div class="card-body">
+                    <p><strong>Personajes Ilustres:</strong> Miguel Hidalgo, Ignacio Allende y Juan José de los Reyes Martínez ("El Pípila").</p>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <img src="personajes_5.png" alt="El Siervo de la Nación" class="card-img">
+                <div class="card-header-title">
+                    El Siervo de la Nación
+                </div>
+                <div class="card-body">
+                    <p><strong>Personajes Ilustres:</strong> José María Morelos y Pavón ("El Siervo de la Nación").</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- SECCIÓN: MITOS Y LEYENDAS -->
+        <section id="mitos-y-leyendas">
+            <div class="section-header">
+                <h2>Mito, Leyenda y Análisis Histórico</h2>
+            </div>
+
+            <article class="content-card myth-card">
+                <img src="mito_1.png" alt="Mito del salto de Juan Escutia" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">Mito y Leyenda</span>
+                    El Salto de Juan Escutia
+                </div>
+                <div class="card-body">
+                    <p><strong>Análisis Histórico:</strong> El mito más famoso afirma que Juan Escutia se envolvió en la bandera nacional y se arrojó al vacío para evitar que cayera en manos enemigas. El análisis histórico señala que, si bien la resistencia de los cadetes fue real y heroica, la historia del salto con la bandera fue una construcción narrativa posterior para fortalecer la identidad nacional.</p>
+                </div>
+            </article>
+
+            <article class="content-card myth-card">
+                <img src="mito_2.png" alt="Porfirio Díaz" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">Mito y Leyenda</span>
+                    La Fecha del Grito y Porfirio Díaz
+                </div>
+                <div class="card-body">
+                    <p><strong>Análisis Histórico:</strong> Existe el mito de que el presidente Porfirio Díaz cambió la fecha del Grito al 15 de septiembre para hacerla coincidir con su cumpleaños. Sin embargo, los registros históricos confirman que las celebraciones populares en la víspera ya se realizaban desde la década de 1840.</p>
+                </div>
+            </article>
+
+            <article class="content-card myth-card">
+                <img src="mito_3.png" alt="Bandera de México" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">Mito y Leyenda</span>
+                    Significado de los Colores de la Bandera
+                </div>
+                <div class="card-body">
+                    <p><strong>Análisis Histórico:</strong> Se suele creer que los colores siempre significaron Esperanza, Unidad y Sangre. Sin embargo, en la bandera Trigarante original, el Verde representaba la Independencia, el Blanco la Fe Católica y el Rojo la Unión.</p>
+                </div>
+            </article>
+
+            <article class="content-card myth-card">
+                <img src="mito_4.png" alt="El Pípila" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">Mito y Leyenda</span>
+                    La Losa de El Pípila
+                </div>
+                <div class="card-body">
+                    <p><strong>Análisis Histórico:</strong> La leyenda cuenta que El Pípila se ató una losa de piedra a la espalda para quemar la puerta de la Alhóndiga. La investigación histórica concluye que la figura de El Pípila representa una metáfora colectiva en honor a los mineros anónimos.</p>
+                </div>
+            </article>
+
+            <article class="content-card myth-card">
+                <img src="mito_5.png" alt="Sentimientos de la Nación" class="card-img">
+                <div class="card-header-title">
+                    <span class="badge">Visión e Ideario</span>
+                    José María Morelos y los Sentimientos de la Nación
+                </div>
+                <div class="card-body">
+                    <p><strong>Análisis Histórico:</strong> Morelos aportó orden táctico militar y visión legal. En septiembre de 1813 presentó ante el Congreso de Chilpancingo el documento <em>Sentimientos de la Nación</em>, sentando las bases institucionales para la abolición de la esclavitud y la división de poderes.</p>
+                </div>
+            </article>
+        </section>
+
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <img src="footer.png" alt="Ilustración Miguel Hidalgo" class="footer-banner-img">
+        <p>© Sitio Informativo Mes Patrio - ¡Orgullo Mexicano!</p>
+        
+        <nav>
+            <a href="#linea-de-tiempo">Fechas</a> | 
+            <a href="#personajes">Personajes</a> | 
+            <a href="#mitos-y-leyendas">Mitos</a>
+        </nav>
+
+        <div class="student-info">
+            <p><strong>Alumno:</strong> Arellano Delgado Ismael</p>
+            <p><strong>Número de Control:</strong> 24308051280484</p>
+            <p><strong>Grupo:</strong> 5I</p>
+        </div>
+
+        <p style="margin-top: 10px; font-weight: bold; color: var(--primary-red); font-size: 1.1rem;">¡Viva México!</p>
+    </footer>
+
+</body>
+</html>
